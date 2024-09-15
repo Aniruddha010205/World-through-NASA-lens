@@ -12,23 +12,44 @@
   </head>
   <body>
     <main class="main__content">
-      <img class="main__image" id="background__image" src="./worldwar.jpg" />
-      <div class="main__div">
+      <img
+        class="main__image"
+        id="background__image"
+        src="./public/Background.jpg"
+      />
+      <div class="main__hero">
         <h1>The World through NASA lens</h1>
-        <p>Welcome to "The World through NASA lens" where you will be able to see the best picture clicked by NASA satellites and observateries from around the Universe</p>
-        <p>The Astronomy Picture of the Day (APOD) is a NASA project that provides a daily image or photograph of our universe.</p>
-        <p>It showcases a wide range of images, including photos of planets, stars, galaxies, nebulae, and other astronomical phenomena,</p>
-        <p>as well as significant events captured by NASA missions and observatories.</p>
-        <p>Select a date of your choice, for example your birthday and veiw the APOD</p>
+        <p>
+          Welcome to "The World through NASA lens" where you will be able to see
+          the best picture clicked by NASA satellites from around the Universe.
+          <br />
+          The Astronomy Picture of the Day (APOD) is a NASA project that
+          provides a daily image or photograph of our universe.
+          <br />
+          It showcases a wide range of images, including photos of planets,
+          stars, galaxies, nebulae, and other astronomical phenomena,
+          <br />
+          as well as significant events captured by NASA missions and
+          observatories.
+          <br />
+          <br />
+          Select a date of your choice, for example your birthday and veiw the
+          APOD
+        </p>
       </div>
-      <div id="container3D"></div>
-    
 
       <form class="main__form" id="mainform">
         <input class="main__input" type="date" id="datefiled" />
         <input class="btn" type="submit" value="Submit" />
       </form>
+
+      <div class="main__description">
+        <h2 class="main__title">Title</h2>
+        <h3 class="main__date">Date</h3>
+        <a class="btn" href="/">Reload</a>
+      </div>
     </main>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./main.js"></script>
   </body>

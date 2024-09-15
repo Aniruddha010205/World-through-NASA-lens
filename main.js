@@ -1,33 +1,20 @@
 const api_key = "xHx2Nr5Ujl0IbVhu7YVQhxDZHhsU6qfGj4fyQbQF";
-
 const api_url = "https://api.nasa.gov/planetary/apod";
 
 const form = document.querySelector(".main__form");
-const title = document.querySelector(".main__div");
-const get_data = async (date) => {
-  try {
-    const response_data = await fetch(
-      `${api_url}?date=${date}&api_key=${api_key}`
-    );
-    let data = await response_data.json();
-    const image = document.getElementById("background__image");
-    image.src = `${data.url}`;
-    form.style.display = "none";
-    title.style.display = "none";
-  } catch (error) {
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: "Something went wrong!",
-    });
-  }
-};
+const inputField = document.querySelector(".main__input");
+const title = document.querySelector(".main__hero");
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const dateFilled = form.querySelector(".main__input").value;
+const image = document.getElementById("background__image");
+const imageDate = document.querySelector(".main__date");
+const imageTitle = document.querySelector(".main__title");
+const imageDescription = document.querySelector(".main__description");
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const dateFilled = inputField.value;
   if (dateFilled) {
-    get_data(dateFilled);
+    GetData(dateFilled);
   } else {
     Swal.fire({
       icon: "error",
@@ -37,21 +24,39 @@ form.addEventListener("submit", (e) => {
   }
 });
 
-function init() {
-  var today = new Date();
-  var yyyy = today.getFullYear();
-  var mm = String(today.getMonth() + 1).padStart(2, "0");
-  var dd = String(today.getDate()).padStart(2, "0");
+window.addEventListener("load", () => {
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, "0");
+  const dd = String(today.getDate()).padStart(2, "0");
 
-  var maxDate = yyyy + "-" + mm + "-" + dd;
+  const maxDate = yyyy + "-" + mm + "-" + dd;
 
-  form.querySelector(".main__input").max = maxDate;
+  inputField.max = maxDate;
+
+  imageDescription.style.display = "none";
+});
+
+async function GetData(date) {
+  try {
+    const response_data = await fetch(
+      `${api_url}?date=${date}&api_key=${api_key}`
+    );
+    const data = await response_data.json();
+    const [year, month, day] = data.date.split("-");
+
+    image.src = `${data.url}`;
+    imageTitle.innerHTML = `${data.title}`;
+    imageDate.innerHTML = `Clicked on: ${day}-${month}-${year}`;
+
+    imageDescription.style.display = "flex";
+    form.style.display = "none";
+    title.style.display = "none";
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Something went wrong!",
+    });
+  }
 }
-
-window.addEventListener("load", init);
-
-
-
-
-
-
